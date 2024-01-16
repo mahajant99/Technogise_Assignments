@@ -1,16 +1,16 @@
 import java.util.*;
 
 class Task{
-    String Name;
+    String name;
     String priority;
 
-    Task(String Name, String priority){
-        this.Name=Name;
+    Task(String name, String priority){
+        this.name=name;
         this.priority=priority;
     }
 
     public String toString() {
-        return "Name: " + Name + ", Priority: " + priority;
+        return "Name: " + name + ", Priority: " + priority;
     }
 }
 
@@ -54,11 +54,11 @@ class TaskList{
 
     static void addTasks(){
         System.out.print("Enter task name: ");
-        String Name = sc.nextLine();
+        String name = sc.nextLine();
         System.out.print("Enter task priority (high, medium, low): ");
         String priority = sc.nextLine();
 
-        tasks.add(new Task(Name, priority));
+        tasks.add(new Task(name, priority));
         System.out.println("Task added successfully!");
     }
 
@@ -80,7 +80,7 @@ class TaskList{
 
         System.out.print("Enter new name");
         String newName = sc.nextLine();
-        task.Name = newName;
+        task.name = newName;
             
         System.out.print("Enter new priority ");
         String newPriority = sc.nextLine();
