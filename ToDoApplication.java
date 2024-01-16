@@ -24,11 +24,9 @@ class TaskManager{
         String name = sc.nextLine();
         System.out.print("Enter task priority (high, medium, low): ");
         String priority = sc.nextLine();
-
         tasks.add(new Task(name, priority));
         System.out.println("Task added successfully!");
     }
-
     void viewTasks(){
         if (tasks.isEmpty()) {
             System.out.println("No tasks in the list.");
@@ -39,28 +37,43 @@ class TaskManager{
             }
         }
     }
-    
     void editTasks() {
         System.out.print("Enter the number of the task to edit: ");
         int taskNumber = sc.nextInt() - 1;
-        Task task = tasks.get(taskNumber);
+        sc.nextLine();
 
-        System.out.print("Enter new name");
-        String newName = sc.nextLine();
-        task.name = newName;
-            
-        System.out.print("Enter new priority ");
-        String newPriority = sc.nextLine();
-        task.priority = newPriority;
-        
-        System.out.println("Task updated successfully!");
+        if (isValidTaskNumber(taskNumber)){
+            Task task = tasks.get(taskNumber);
+
+            System.out.print("Enter new name: ");
+            String newName = sc.nextLine();
+            task.name = newName;
+
+            System.out.print("Enter new priority: ");
+            String newPriority = sc.nextLine();
+            task.priority = newPriority;
+
+            System.out.println("Task updated successfully!");
+        } else {
+            System.out.println("Invalid task number!");
+        }
     }
 
     void deleteTasks() {
         System.out.print("Enter the number of the task to delete: ");
         int taskNumber = sc.nextInt() - 1;
-        tasks.remove(taskNumber);
-        System.out.println("Task deleted successfully!");
+        sc.nextLine();
+
+        if(isValidTaskNumber(taskNumber)){
+            tasks.remove(taskNumber);
+            System.out.println("Task deleted successfully!");
+        } else {
+            System.out.println("Invalid task number!");
+        }
+    }
+
+    private boolean isValidTaskNumber(int taskNumber){
+        return taskNumber >=0 && taskNumber < tasks.size();
     }
 }
 
