@@ -3,10 +3,12 @@ import java.util.*;
 class Task{
     private String name;
     private String priority;
+    private boolean completed;
 
     Task(String name, String priority){
         this.name=name;
         this.priority=priority;
+        this.completed=false;
     }
 
     public String getName(){
@@ -17,6 +19,10 @@ class Task{
         return priority;
     }
 
+    public boolean isCompleted(){
+        return completed;
+    }
+
     public void setName(String name){
         this.name=name;
     }
@@ -25,8 +31,13 @@ class Task{
         this.priority=priority;
     }
 
+    public void setCompleted(boolean completed){
+        this.completed = completed;
+    }
+
     public String toString() {
-        return "Name: " + name + ", Priority: " + priority;
+        String status = completed ? "Completed" : "Pending";
+        return "Name: " + name + ", Priority: " + priority + ", Status: " + status;
     }
 }
 
@@ -38,7 +49,7 @@ class TaskManager{
     void addTasks(){
         System.out.print("Enter task name: ");
         String name = sc.nextLine();
-        
+
         System.out.println("Choose task priority: ");
         System.out.println("1. High");
         System.out.println("2. Medium");
@@ -49,7 +60,7 @@ class TaskManager{
 
         String priority = getPriorityString(priorityChoice);
 
-        Task task = new Task(name,priority);
+        Task task = new Task(name, priority);
         tasks.add(task);
         System.out.println("Task added successfully!");
     }
@@ -123,6 +134,20 @@ class TaskManager{
                 return "Invalid Priority";
         }
     }
+
+    public void completeTask(){
+        System.out.print("Enter the number of the task to mark as completed: ");
+        int taskNumber = sc.nextInt() - 1;
+        sc.nextLine();
+
+        if (isValidTaskNumber(taskNumber)) {
+            Task task = tasks.get(taskNumber);
+            task.setCompleted(true);
+            System.out.println("Task marked as completed!");
+        } else {
+            System.out.println("Invalid task number.");
+        }
+    }
 }
 
 class TaskList{
@@ -136,7 +161,8 @@ class TaskList{
             System.out.println("2. View tasks");
             System.out.println("3. Edit task");
             System.out.println("4. Delete task");
-            System.out.println("5. Exit");
+            System.out.println("5. Mark task as completed");
+            System.out.println("6. Exit");
             System.out.print("Enter your input: ");
 
             Scanner sc = new Scanner(System.in);
@@ -155,7 +181,10 @@ class TaskList{
                 case 4:
                     taskManager.deleteTasks();
                     break;
-                case 5:
+                case 5: 
+                    taskManager.completeTask();
+                    break;
+                case 6:
                     System.exit(0);
                 default:
                     System.out.println("Invalid input. Please try again.");
