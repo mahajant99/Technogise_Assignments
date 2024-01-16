@@ -22,11 +22,22 @@ class TaskManager{
     void addTasks(){
         System.out.print("Enter task name: ");
         String name = sc.nextLine();
-        System.out.print("Enter task priority (high, medium, low): ");
-        String priority = sc.nextLine();
-        tasks.add(new Task(name, priority));
+        
+        System.out.println("Choose task priority: ");
+        System.out.println("1. High");
+        System.out.println("2. Medium");
+        System.out.println("3. Low");
+        System.out.print("Enter your choice (1/2/3): ");
+        int priorityChoice = sc.nextInt();
+        sc.nextLine();
+
+        String priority = getPriorityString(priorityChoice);
+
+        Task task = new Task(name,priority);
+        tasks.add(task);
         System.out.println("Task added successfully!");
     }
+
     void viewTasks(){
         if (tasks.isEmpty()) {
             System.out.println("No tasks in the list.");
@@ -37,6 +48,7 @@ class TaskManager{
             }
         }
     }
+    
     void editTasks() {
         System.out.print("Enter the number of the task to edit: ");
         int taskNumber = sc.nextInt() - 1;
@@ -49,8 +61,15 @@ class TaskManager{
             String newName = sc.nextLine();
             task.name = newName;
 
-            System.out.print("Enter new priority: ");
-            String newPriority = sc.nextLine();
+            System.out.println("Choose new task priority: ");
+            System.out.println("1. High");
+            System.out.println("2. Medium");
+            System.out.println("3. Low");
+            System.out.print("Enter your choice (1/2/3): ");
+            int priorityChoice = sc.nextInt();
+            sc.nextLine();
+
+            String newPriority = getPriorityString(priorityChoice);
             task.priority = newPriority;
 
             System.out.println("Task updated successfully!");
@@ -74,6 +93,19 @@ class TaskManager{
 
     private boolean isValidTaskNumber(int taskNumber){
         return taskNumber >=0 && taskNumber < tasks.size();
+    }
+
+    private String getPriorityString(int priorityChoice){
+        switch (priorityChoice) {
+            case 1:
+                return "High";
+            case 2:
+                return "Medium";
+            case 3:
+                return "Low";
+            default:
+                return "Invalid Priority";
+        }
     }
 }
 
