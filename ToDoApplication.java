@@ -1,11 +1,27 @@
 import java.util.*;
 
 class Task{
-    String name;
-    String priority;
+    private String name;
+    private String priority;
 
     Task(String name, String priority){
         this.name=name;
+        this.priority=priority;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getPriority(){
+        return priority;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+
+    public void setPriority(String priority){
         this.priority=priority;
     }
 
@@ -16,9 +32,9 @@ class Task{
 
 class TaskManager{
 
-    ArrayList<Task> tasks = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-    
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private Scanner sc = new Scanner(System.in);
+
     void addTasks(){
         System.out.print("Enter task name: ");
         String name = sc.nextLine();
@@ -59,7 +75,7 @@ class TaskManager{
 
             System.out.print("Enter new name: ");
             String newName = sc.nextLine();
-            task.name = newName;
+            task.setName(newName);
 
             System.out.println("Choose new task priority: ");
             System.out.println("1. High");
@@ -70,7 +86,7 @@ class TaskManager{
             sc.nextLine();
 
             String newPriority = getPriorityString(priorityChoice);
-            task.priority = newPriority;
+            task.setPriority(newPriority);
 
             System.out.println("Task updated successfully!");
         } else {
@@ -122,10 +138,10 @@ class TaskList{
             System.out.println("4. Delete task");
             System.out.println("5. Exit");
             System.out.print("Enter your input: ");
-    
-            int input = taskManager.sc.nextInt();
-            taskManager.sc.nextLine();
-            
+
+            Scanner sc = new Scanner(System.in);
+            int input = sc.nextInt();
+
             switch (input) {
                 case 1:
                     taskManager.addTasks();
