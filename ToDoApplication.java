@@ -28,6 +28,17 @@ class TaskManager{
         tasks.add(new Task(name, priority));
         System.out.println("Task added successfully!");
     }
+
+    void viewTasks(){
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks in the list.");
+        } else {
+            System.out.println("Your tasks:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
+    }
 }
 
 class TaskList{
@@ -52,7 +63,7 @@ class TaskList{
                     taskManager.addTasks();
                     break;
                 case 2:
-                    viewTasks();
+                    taskManager.viewTasks();
                     break;
                 case 3:
                     editTasks();
@@ -64,17 +75,6 @@ class TaskList{
                     System.exit(0);
                 default:
                     System.out.println("Invalid input. Please try again.");
-            }
-        }
-    }
-
-    static void viewTasks(){
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks in the list.");
-        } else {
-            System.out.println("Your tasks:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
             }
         }
     }
