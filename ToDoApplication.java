@@ -1,14 +1,18 @@
 import java.util.*;
 
+enum TaskStatus{
+    Pending, Completed
+}
+
 class Task{
     private String name;
     private String priority;
-    private boolean completed;
+    private TaskStatus status;
 
     Task(String name, String priority){
         this.name=name;
         this.priority=priority;
-        this.completed=false;
+        this.status=TaskStatus.Pending;
     }
 
     public String getName(){
@@ -19,8 +23,8 @@ class Task{
         return priority;
     }
 
-    public boolean isCompleted(){
-        return completed;
+    public TaskStatus geStatus(){
+        return status;
     }
 
     public void setName(String name){
@@ -31,12 +35,11 @@ class Task{
         this.priority=priority;
     }
 
-    public void setCompleted(boolean completed){
-        this.completed = completed;
+    public void markAsCompleted(){
+        this.status = TaskStatus.Completed;
     }
 
     public String toString() {
-        String status = completed ? "Completed" : "Pending";
         return "Name: " + name + ", Priority: " + priority + ", Status: " + status;
     }
 }
@@ -135,14 +138,14 @@ class TaskManager{
         }
     }
 
-    public void completeTask(){
+    public void markTaskAsCompleted(){
         System.out.print("Enter the number of the task to mark as completed: ");
         int taskNumber = sc.nextInt() - 1;
         sc.nextLine();
 
         if (isValidTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber);
-            task.setCompleted(true);
+            task.markAsCompleted();
             System.out.println("Task marked as completed!");
         } else {
             System.out.println("Invalid task number.");
@@ -182,7 +185,7 @@ class TaskList{
                     taskManager.deleteTasks();
                     break;
                 case 5: 
-                    taskManager.completeTask();
+                    taskManager.markTaskAsCompleted();
                     break;
                 case 6:
                     System.exit(0);
