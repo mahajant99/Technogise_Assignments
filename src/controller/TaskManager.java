@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Task;
+
 public class TaskManager {
     
     private ArrayList<Task> tasks = new ArrayList<>();

@@ -1,7 +1,7 @@
  Technogise Assignments
 =========================================
 
-## ToDO Application
+## ToDo Application
 
 1. Create a task list.
 2. Given: An empty task list.

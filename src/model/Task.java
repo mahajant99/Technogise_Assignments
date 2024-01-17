@@ -1,3 +1,5 @@
+package model;
+
 enum TaskStatus{
     Pending, Completed
 }
@@ -7,7 +9,7 @@ public class Task {
     private String priority;
     private TaskStatus status;
 
-    Task(String name, String priority){
+    public Task(String name, String priority){
         this.name=name;
         this.priority=priority;
         this.status=TaskStatus.Pending;
