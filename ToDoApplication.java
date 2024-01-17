@@ -39,6 +39,23 @@ class TaskManager{
             }
         }
     }
+    
+    void editTasks() {
+        System.out.print("Enter the number of the task to edit: ");
+        int taskNumber = sc.nextInt() - 1;
+        Task task = tasks.get(taskNumber);
+
+        System.out.print("Enter new name");
+        String newName = sc.nextLine();
+        task.name = newName;
+            
+        System.out.print("Enter new priority ");
+        String newPriority = sc.nextLine();
+        task.priority = newPriority;
+        
+        System.out.println("Task updated successfully!");
+        
+    }
 }
 
 class TaskList{
@@ -66,7 +83,7 @@ class TaskList{
                     taskManager.viewTasks();
                     break;
                 case 3:
-                    editTasks();
+                    taskManager.editTasks();
                     break;
                 case 4:
                     deleteTasks();
@@ -78,24 +95,6 @@ class TaskList{
             }
         }
     }
-
-    static void editTasks() {
-        System.out.print("Enter the number of the task to edit: ");
-        int taskNumber = sc.nextInt() - 1;
-        Task task = tasks.get(taskNumber);
-
-        System.out.print("Enter new name");
-        String newName = sc.nextLine();
-        task.name = newName;
-            
-        System.out.print("Enter new priority ");
-        String newPriority = sc.nextLine();
-        task.priority = newPriority;
-        
-        System.out.println("Task updated successfully!");
-        
-    }
-
     static void deleteTasks() {
         System.out.print("Enter the number of the task to delete: ");
         int taskNumber = sc.nextInt() - 1;
