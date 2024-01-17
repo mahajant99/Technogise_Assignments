@@ -16,7 +16,7 @@ class Task{
 
 class TaskManager{
 
-    static ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
     
     void addTasks(){
@@ -54,7 +54,13 @@ class TaskManager{
         task.priority = newPriority;
         
         System.out.println("Task updated successfully!");
-        
+    }
+
+    void deleteTasks() {
+        System.out.print("Enter the number of the task to delete: ");
+        int taskNumber = sc.nextInt() - 1;
+        tasks.remove(taskNumber);
+        System.out.println("Task deleted successfully!");
     }
 }
 
@@ -86,7 +92,7 @@ class TaskList{
                     taskManager.editTasks();
                     break;
                 case 4:
-                    deleteTasks();
+                    taskManager.deleteTasks();
                     break;
                 case 5:
                     System.exit(0);
@@ -95,11 +101,4 @@ class TaskList{
             }
         }
     }
-    static void deleteTasks() {
-        System.out.print("Enter the number of the task to delete: ");
-        int taskNumber = sc.nextInt() - 1;
-        tasks.remove(taskNumber);
-        System.out.println("Task deleted successfully!");
-    }
-
 }
