@@ -49,7 +49,7 @@ class TaskManager{
     private ArrayList<Task> tasks = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
-    void addTasks(){
+    public String addTasks(){
         System.out.print("Enter task name: ");
         String name = sc.nextLine();
 
@@ -65,21 +65,22 @@ class TaskManager{
 
         Task task = new Task(name, priority);
         tasks.add(task);
-        System.out.println("Task added successfully!");
+        return "Task added successfully!";
     }
 
-    void viewTasks(){
+    public String viewTasks(){
         if (tasks.isEmpty()) {
-            System.out.println("No tasks in the list.");
+            return "No tasks in the list.";
         } else {
-            System.out.println("Your tasks:");
+            StringBuilder result = new StringBuilder("Your tasks:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
+                result.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
             }
+            return result.toString();
         }
     }
-    
-    void editTasks() {
+
+    public String editTasks() {
         System.out.print("Enter the number of the task to edit: ");
         int taskNumber = sc.nextInt() - 1;
         sc.nextLine();
@@ -102,22 +103,22 @@ class TaskManager{
             String newPriority = getPriorityString(priorityChoice);
             task.setPriority(newPriority);
 
-            System.out.println("Task updated successfully!");
+            return "Task updated successfully!";
         } else {
-            System.out.println("Invalid task number!");
+            return "Invalid task number!";
         }
     }
 
-    void deleteTasks() {
+    public String deleteTasks() {
         System.out.print("Enter the number of the task to delete: ");
         int taskNumber = sc.nextInt() - 1;
         sc.nextLine();
 
         if(isValidTaskNumber(taskNumber)){
             tasks.remove(taskNumber);
-            System.out.println("Task deleted successfully!");
+            return "Task deleted successfully!";
         } else {
-            System.out.println("Invalid task number!");
+            return "Invalid task number!";
         }
     }
 
@@ -138,7 +139,7 @@ class TaskManager{
         }
     }
 
-    public void markTaskAsCompleted(){
+    public String markTaskAsCompleted(){
         System.out.print("Enter the number of the task to mark as completed: ");
         int taskNumber = sc.nextInt() - 1;
         sc.nextLine();
@@ -146,9 +147,9 @@ class TaskManager{
         if (isValidTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber);
             task.markAsCompleted();
-            System.out.println("Task marked as completed!");
+            return "Task marked as completed!";
         } else {
-            System.out.println("Invalid task number.");
+            return "Invalid task number.";
         }
     }
 }
@@ -170,28 +171,30 @@ class TaskList{
 
             Scanner sc = new Scanner(System.in);
             int input = sc.nextInt();
-
+            
+            String result;
             switch (input) {
                 case 1:
-                    taskManager.addTasks();
+                    result = taskManager.addTasks();
                     break;
                 case 2:
-                    taskManager.viewTasks();
+                    result = taskManager.viewTasks();
                     break;
                 case 3:
-                    taskManager.editTasks();
+                    result = taskManager.editTasks();
                     break;
                 case 4:
-                    taskManager.deleteTasks();
+                    result = taskManager.deleteTasks();
                     break;
                 case 5: 
-                    taskManager.markTaskAsCompleted();
+                    result = taskManager.markTaskAsCompleted();
                     break;
                 case 6:
                     System.exit(0);
                 default:
-                    System.out.println("Invalid input. Please try again.");
+                result = "Invalid input. Please try again.";
             }
+            System.out.println(result);
         }
     }
 }
