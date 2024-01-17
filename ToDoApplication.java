@@ -14,11 +14,27 @@ class Task{
     }
 }
 
-class TaskList{
-    static ArrayList<Task> tasks = new ArrayList<>();
-    static Scanner sc = new Scanner(System.in);
+class TaskManager{
 
+    static ArrayList<Task> tasks = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+    
+    void addTasks(){
+        System.out.print("Enter task name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter task priority (high, medium, low): ");
+        String priority = sc.nextLine();
+
+        tasks.add(new Task(name, priority));
+        System.out.println("Task added successfully!");
+    }
+}
+
+class TaskList{
     public static void main(String[] args) {
+
+        TaskManager taskManager = new TaskManager();
+        
         while (true){
             System.out.println("\nTask List Menu:");
             System.out.println("1. Add task");
@@ -28,12 +44,12 @@ class TaskList{
             System.out.println("5. Exit");
             System.out.print("Enter your input: ");
     
-            int input = sc.nextInt();
-            sc.nextLine();
+            int input = taskManager.sc.nextInt();
+            taskManager.sc.nextLine();
             
             switch (input) {
                 case 1:
-                    addTasks();
+                    taskManager.addTasks();
                     break;
                 case 2:
                     viewTasks();
@@ -50,16 +66,6 @@ class TaskList{
                     System.out.println("Invalid input. Please try again.");
             }
         }
-    }
-
-    static void addTasks(){
-        System.out.print("Enter task name: ");
-        String name = sc.nextLine();
-        System.out.print("Enter task priority (high, medium, low): ");
-        String priority = sc.nextLine();
-
-        tasks.add(new Task(name, priority));
-        System.out.println("Task added successfully!");
     }
 
     static void viewTasks(){
