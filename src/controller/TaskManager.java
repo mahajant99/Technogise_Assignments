@@ -1,14 +1,24 @@
 package controller;
 
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import model.Task;
 import model.TaskPriority;
+import repository.DatabaseManager;
 import view.TaskUI;;
 
 public class TaskManager {
     
     private ArrayList<Task> tasks = new ArrayList<>();
+    private Connection connection;
+
+    public TaskManager() {
+        this.connection = DatabaseManager.getConnection();
+    }
 
     public String addTasks(TaskUI taskUI){
         String name = taskUI.getTaskName();
@@ -88,5 +98,9 @@ public class TaskManager {
         } else {
             return "Invalid task number.";
         }
+    }
+
+    public void closeDatabaseConnection() {
+        DatabaseManager.closeConnection();
     }
 }
