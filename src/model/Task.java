@@ -6,10 +6,10 @@ enum TaskStatus{
 
 public class Task {
     private String name;
-    private String priority;
+    private TaskPriority priority;
     private TaskStatus status;
 
-    public Task(String name, String priority){
+    public Task(String name, TaskPriority priority){
         this.name=name;
         this.priority=priority;
         this.status=TaskStatus.Pending;
@@ -19,7 +19,7 @@ public class Task {
         return name;
     }
 
-    public String getPriority(){
+    public TaskPriority getPriority(){
         return priority;
     }
 
@@ -31,7 +31,7 @@ public class Task {
         this.name=name;
     }
 
-    public void setPriority(String priority){
+    public void setPriority(TaskPriority priority){
         this.priority=priority;
     }
 

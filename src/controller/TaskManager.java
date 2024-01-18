@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.Task;
+import model.TaskPriority;
 import view.TaskUI;;
 
 public class TaskManager {
@@ -11,8 +12,7 @@ public class TaskManager {
 
     public String addTasks(TaskUI taskUI){
         String name = taskUI.getTaskName();
-        int priorityChoice = taskUI.getPriorityChoice();
-        String priority = getPriorityString(priorityChoice);
+        TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
 
         Task task = new Task(name, priority);
         tasks.add(task);
@@ -40,8 +40,7 @@ public class TaskManager {
             String newName = taskUI.getTaskName();
             task.setName(newName);
 
-            int priorityChoice = taskUI.getPriorityChoice();
-            String newPriority = getPriorityString(priorityChoice);
+            TaskPriority newPriority = getPriorityChoice(taskUI.getPriorityChoice());
 
             task.setPriority(newPriority);
 
@@ -66,16 +65,16 @@ public class TaskManager {
         return taskNumber >=0 && taskNumber < tasks.size();
     }
 
-    private String getPriorityString(int priorityChoice){
+    private TaskPriority getPriorityChoice(int priorityChoice) {
         switch (priorityChoice) {
             case 1:
-                return "High";
+                return TaskPriority.High;
             case 2:
-                return "Medium";
+                return TaskPriority.Medium;
             case 3:
-                return "Low";
+                return TaskPriority.Low;
             default:
-                return "Invalid Priority";
+                return null;
         }
     }
 
