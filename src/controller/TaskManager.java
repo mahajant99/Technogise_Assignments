@@ -1,27 +1,17 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import model.Task;
+import view.TaskUI;;
 
 public class TaskManager {
     
     private ArrayList<Task> tasks = new ArrayList<>();
-    private Scanner sc = new Scanner(System.in);
 
-    public String addTasks(){
-        System.out.print("Enter task name: ");
-        String name = sc.nextLine();
-
-        System.out.println("Choose task priority: ");
-        System.out.println("1. High");
-        System.out.println("2. Medium");
-        System.out.println("3. Low");
-        System.out.print("Enter your choice (1/2/3): ");
-        int priorityChoice = sc.nextInt();
-        sc.nextLine();
-
+    public String addTasks(TaskUI taskUI){
+        String name = taskUI.getTaskName();
+        int priorityChoice = taskUI.getPriorityChoice();
         String priority = getPriorityString(priorityChoice);
 
         Task task = new Task(name, priority);
@@ -41,27 +31,18 @@ public class TaskManager {
         }
     }
 
-    public String editTasks() {
-        System.out.print("Enter the number of the task to edit: ");
-        int taskNumber = sc.nextInt() - 1;
-        sc.nextLine();
+    public String editTasks(TaskUI taskUI) {
+        int taskNumber = taskUI.getTaskNumber();
 
         if (isValidTaskNumber(taskNumber)){
             Task task = tasks.get(taskNumber);
 
-            System.out.print("Enter new name: ");
-            String newName = sc.nextLine();
+            String newName = taskUI.getTaskName();
             task.setName(newName);
 
-            System.out.println("Choose new task priority: ");
-            System.out.println("1. High");
-            System.out.println("2. Medium");
-            System.out.println("3. Low");
-            System.out.print("Enter your choice (1/2/3): ");
-            int priorityChoice = sc.nextInt();
-            sc.nextLine();
-
+            int priorityChoice = taskUI.getPriorityChoice();
             String newPriority = getPriorityString(priorityChoice);
+
             task.setPriority(newPriority);
 
             return "Task updated successfully!";
@@ -70,10 +51,8 @@ public class TaskManager {
         }
     }
 
-    public String deleteTasks() {
-        System.out.print("Enter the number of the task to delete: ");
-        int taskNumber = sc.nextInt() - 1;
-        sc.nextLine();
+    public String deleteTasks(TaskUI taskUI) {
+        int taskNumber = taskUI.getTaskNumber();
 
         if(isValidTaskNumber(taskNumber)){
             tasks.remove(taskNumber);
@@ -100,10 +79,8 @@ public class TaskManager {
         }
     }
 
-    public String markTaskAsCompleted(){
-        System.out.print("Enter the number of the task to mark as completed: ");
-        int taskNumber = sc.nextInt() - 1;
-        sc.nextLine();
+    public String markTaskAsCompleted(TaskUI taskUI){
+        int taskNumber = taskUI.getTaskNumber();
 
         if (isValidTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber);
