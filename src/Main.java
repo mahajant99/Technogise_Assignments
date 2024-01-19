@@ -15,16 +15,16 @@ public class Main {
             String result;
             switch (input) {
                 case 1:
-                    result = taskManager.addTasks(taskUI);
+                    result = taskManager.addTask(taskUI);
                     break;
                 case 2:
                     result = taskManager.viewTasks();
                     break;
                 case 3:
-                    result = taskManager.editTasks(taskUI);
+                    result = taskManager.editTask(taskUI);
                     break;
                 case 4:
-                    result = taskManager.deleteTasks(taskUI);
+                    result = taskManager.deleteTask(taskUI);
                     break;
                 case 5: 
                     result = taskManager.markTaskAsCompleted(taskUI);

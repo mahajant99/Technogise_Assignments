@@ -20,7 +20,7 @@ public class TaskManager {
         this.connection = DatabaseManager.getConnection();
     }
 
-    public String addTasks(TaskUI taskUI){
+    public String addTask(TaskUI taskUI){
         String name = taskUI.getTaskName();
         TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
 
@@ -41,7 +41,7 @@ public class TaskManager {
         }
     }
 
-    public String editTasks(TaskUI taskUI) {
+    public String editTask(TaskUI taskUI) {
         int taskNumber = taskUI.getTaskNumber();
 
         if (isValidTaskNumber(taskNumber)){
@@ -60,7 +60,7 @@ public class TaskManager {
         }
     }
 
-    public String deleteTasks(TaskUI taskUI) {
+    public String deleteTask(TaskUI taskUI) {
         int taskNumber = taskUI.getTaskNumber();
 
         if(isValidTaskNumber(taskNumber)){
