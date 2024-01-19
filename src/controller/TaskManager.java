@@ -1,23 +1,20 @@
 package controller;
 
 import java.util.ArrayList;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import model.Task;
 import model.TaskPriority;
 import repository.DatabaseManager;
-import view.TaskUI;;
+import service.TaskService;
+import view.TaskUI;
 
 public class TaskManager {
-    
-    private ArrayList<Task> tasks = new ArrayList<>();
-    private Connection connection;
 
-    public TaskManager() {
-        this.connection = DatabaseManager.getConnection();
+    private final TaskService taskService;
+    private ArrayList<Task> tasks = new ArrayList<>();
+
+    public TaskManager(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     public String addTask(TaskUI taskUI){
@@ -25,7 +22,7 @@ public class TaskManager {
         TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
 
         Task task = new Task(name, priority);
-        tasks.add(task);
+        taskService.addTask(task);
         return "Task added successfully!";
     }
 

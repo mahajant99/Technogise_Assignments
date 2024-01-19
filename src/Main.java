@@ -1,10 +1,16 @@
 import controller.TaskManager;
+import repository.DatabaseManager;
+import repository.TaskRepositoryImpl;
+import service.TaskService;
+import service.TaskServiceImpl;
 import view.TaskUI;
 
 public class Main {
-    public static void main(String[] args) {
 
-        TaskManager taskManager = new TaskManager();
+    public static void main(String[] args) {
+        
+        TaskService taskService = new TaskServiceImpl(new TaskRepositoryImpl(DatabaseManager.getConnection()));
+        TaskManager taskManager = new TaskManager(taskService);
         TaskUI taskUI = new TaskUI();
 
         while (true){
