@@ -1,9 +1,5 @@
 package model;
 
-enum TaskStatus{
-    Pending, Completed
-}
-
 public class Task {
     private String name;
     private TaskPriority priority;
