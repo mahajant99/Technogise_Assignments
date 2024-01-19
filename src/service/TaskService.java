@@ -14,5 +14,9 @@ public class TaskService {
     public void addTask(Task task) {
         taskRepository.addTask(task);
     }
+
+    public void deleteTask(int taskId) {
+        taskRepository.deleteTask(taskId);
+    }
     
 }
