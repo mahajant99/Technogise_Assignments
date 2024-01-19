@@ -33,5 +33,15 @@ public class TaskRepository{
             e.printStackTrace();
         }
     }
+
+    public void deleteTask(int taskId) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
