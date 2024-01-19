@@ -15,7 +15,7 @@ public class DatabaseManager {
 
                 String url = "jdbc:mysql://localhost:3306/todoapplication";
                 String username = "root";
-                String password = "";
+                String password = "mahajan73@";
                 connection = DriverManager.getConnection(url, username, password);
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
