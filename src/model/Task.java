@@ -1,6 +1,7 @@
 package model;
 
 public class Task {
+    private int id;
     private String name;
     private TaskPriority priority;
     private TaskStatus status;
@@ -9,6 +10,10 @@ public class Task {
         this.name=name;
         this.priority=priority;
         this.status=TaskStatus.Pending;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getName(){
@@ -21,6 +26,10 @@ public class Task {
 
     public TaskStatus geStatus(){
         return status;
+    }
+
+    public void setId(int id){
+        this.id=id;
     }
 
     public void setName(String name){
