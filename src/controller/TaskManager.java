@@ -61,7 +61,7 @@ public class TaskManager {
         int taskNumber = taskUI.getTaskNumber();
 
         if(isValidTaskNumber(taskNumber)){
-            tasks.remove(taskNumber);
+            taskService.deleteTask(taskNumber);
             return "Task deleted successfully!";
         } else {
             return "Invalid task number!";
