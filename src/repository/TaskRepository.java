@@ -1,8 +1,12 @@
 package repository;
 
 import model.Task;
+import model.TaskPriority;
+import model.TaskStatus;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskRepository{
 
@@ -43,5 +47,31 @@ public class TaskRepository{
             e.printStackTrace();
         }
     }
-    
+
+    public List<Task> getAllTasks() {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT * FROM tasks";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                TaskPriority priority = TaskPriority.valueOf(resultSet.getString("priority"));
+                TaskStatus status = TaskStatus.valueOf(resultSet.getString("status"));
+
+                Task task = new Task(name, priority);
+                task.setId(id);
+                task.setStatus(status);
+
+                tasks.add(task);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tasks;
+    }
 }

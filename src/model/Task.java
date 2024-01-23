@@ -36,6 +36,10 @@ public class Task {
         this.name=name;
     }
 
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
     public void setPriority(TaskPriority priority){
         this.priority=priority;
     }
