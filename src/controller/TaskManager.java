@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Task;
 import model.TaskPriority;
@@ -27,6 +28,7 @@ public class TaskManager {
     }
 
     public String viewTasks(){
+        List<Task> tasks = taskService.getAllTasks();
         if (tasks.isEmpty()) {
             return "No tasks in the list.";
         } else {
