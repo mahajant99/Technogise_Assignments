@@ -24,7 +24,7 @@ public class Task {
         return priority;
     }
 
-    public TaskStatus geStatus(){
+    public TaskStatus getStatus(){
         return status;
     }
 

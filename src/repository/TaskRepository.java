@@ -18,7 +18,7 @@ public class TaskRepository{
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, task.getName());
             preparedStatement.setString(2, task.getPriority().toString());
-            preparedStatement.setString(3, task.geStatus().toString());
+            preparedStatement.setString(3, task.getStatus().toString());
 
             int affectedRows = preparedStatement.executeUpdate();
 
