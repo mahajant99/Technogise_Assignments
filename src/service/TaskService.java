@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import model.Task;
 import repository.TaskRepository;
 
@@ -17,6 +19,10 @@ public class TaskService {
 
     public void deleteTask(int taskId) {
         taskRepository.deleteTask(taskId);
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.getAllTasks();
     }
     
 }
