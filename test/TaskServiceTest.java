@@ -1,5 +1,3 @@
-package unit_testing;
-
 import java.util.List;
 
 import controller.*;
@@ -8,15 +6,14 @@ import repository.*;
 import service.*;
 import view.*;
 
-
-public class TestTaskService {
+public class TaskServiceTest {
 
     public static void main(String[] args) {
         testAddTask();
     }
 
     private static void testAddTask() {
-        TaskRepository taskRepository = new TaskRepository();
+        TaskRepository taskRepository = new TaskRepository(null);
         TaskService taskService = new TaskService(taskRepository);
 
         taskService.addTask("Test Task", "High");
