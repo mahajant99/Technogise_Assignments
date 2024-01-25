@@ -8,23 +8,77 @@ import model.TaskPriority;
 import repository.DatabaseManager;
 import service.TaskService;
 import view.TaskUI;
+import service.UserService;
 
 public class TaskManager {
 
     private final TaskService taskService;
+    private final UserService userService;
+    private boolean loggedIn;
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public TaskManager(TaskService taskService) {
+    public TaskManager(TaskService taskService, UserService userService) {
         this.taskService = taskService;
+        this.userService = userService;
+        this.loggedIn = false;
+    }
+
+    public boolean login(TaskUI taskUI) {
+        String username = taskUI.getUsername();
+        String password = taskUI.getPassword();
+        loggedIn = userService.signIn(username, password);
+        return loggedIn;
+    }
+
+    public void signUp(TaskUI taskUI) {
+        String username = taskUI.getUsername();
+        String password = taskUI.getPassword();
+        userService.signUp(username, password);
+        taskUI.displayMessage("Signup successful! Please login.");
+    }
+
+    public void showTaskMenu(TaskUI taskUI) {
+        if (loggedIn) {
+            taskUI.displayTaskListMenu();
+        } else {
+            taskUI.displayMessage("Please login to access tasks.");
+        }
+    }
+
+    public String performTask(int input, TaskUI taskUI) {
+        if (loggedIn) {
+            switch (input) {
+                case 1:
+                    return addTask(taskUI);
+                case 2:
+                    return viewTasks();
+                case 3:
+                    return editTask(taskUI);
+                case 4:
+                    return deleteTask(taskUI);
+                case 5:
+                    return markTaskAsCompleted(taskUI);
+                case 6:
+                    System.exit(0);
+                default:
+                    return "Invalid input. Please try again.";
+            }
+        } else {
+            return "Please login to access tasks.";
+        }
     }
 
     public String addTask(TaskUI taskUI){
-        String name = taskUI.getTaskName();
-        TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
+        if (loggedIn) {
+            String name = taskUI.getTaskName();
+            TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
 
-        Task task = new Task(name, priority);
-        taskService.addTask(task);
-        return "Task added successfully!";
+            Task task = new Task(name, priority);
+            taskService.addTask(task);
+            return "Task added successfully!";
+        } else {
+            return "Please login to add tasks.";
+        }
     }
 
     public String viewTasks(){

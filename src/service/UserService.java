@@ -11,9 +11,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void signUp(User user) {
-        userRepository.addUser(user);
+    public void signUp(String username, String password) {
+        userRepository.addUser(username, password);
     }
+    
 
     public boolean signIn(String username, String password) {
         return userRepository.isUserExists(username, password);

@@ -1,45 +1,42 @@
 import controller.TaskManager;
 import repository.DatabaseManager;
 import repository.TaskRepository;
+import repository.UserRepository;
 import service.TaskService;
+import service.UserService;
 import view.TaskUI;
 
 public class Main {
 
     public static void main(String[] args) {
         
+        UserService userService = new UserService(new UserRepository(DatabaseManager.getConnection()));
         TaskService taskService = new TaskService(new TaskRepository(DatabaseManager.getConnection()));
-        TaskManager taskManager = new TaskManager(taskService);
+        TaskManager taskManager = new TaskManager(taskService, userService);
         TaskUI taskUI = new TaskUI();
 
-        while (true){
+        while (true) {
+            taskUI.displayLoginMenu();
+            int loginChoice = taskUI.getLoginChoice();
 
-            taskUI.displayTaskListMenu();
-            int input = taskUI.getUserInput();
-            
-            String result;
-            switch (input) {
+            switch (loginChoice) {
                 case 1:
-                    result = taskManager.addTask(taskUI);
+                    if (taskManager.login(taskUI)) {
+                        taskManager.showTaskMenu(taskUI);
+                        int input = taskUI.getUserInput();
+
+                        String result = taskManager.performTask(input, taskUI);
+                        taskUI.displayMessage(result);
+                    } else {
+                        taskUI.displayMessage("Login failed. Please try again.");
+                    }
                     break;
                 case 2:
-                    result = taskManager.viewTasks();
+                    taskManager.signUp(taskUI);
                     break;
-                case 3:
-                    result = taskManager.editTask(taskUI);
-                    break;
-                case 4:
-                    result = taskManager.deleteTask(taskUI);
-                    break;
-                case 5: 
-                    result = taskManager.markTaskAsCompleted(taskUI);
-                    break;
-                case 6:
-                    System.exit(0);
                 default:
-                result = "Invalid input. Please try again.";
+                    taskUI.displayMessage("Invalid choice. Please try again.");
             }
-            taskUI.displayMessage(result);
         }
     }
 }
