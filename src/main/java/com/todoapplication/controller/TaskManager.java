@@ -1,14 +1,14 @@
-package controller;
+package com.todoapplication.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Task;
-import model.TaskPriority;
-import repository.DatabaseManager;
-import service.TaskService;
-import view.TaskUI;
-import service.UserService;
+import com.todoapplication.model.Task;
+import com.todoapplication.model.TaskPriority;
+import com.todoapplication.repository.DatabaseManager;
+import com.todoapplication.service.TaskService;
+import com.todoapplication.view.TaskUI;
+import com.todoapplication.service.UserService;
 
 public class TaskManager {
 

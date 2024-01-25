@@ -1,4 +1,4 @@
-package model;
+package com.todoapplication.model;
 
 public class Task {
     private int id;

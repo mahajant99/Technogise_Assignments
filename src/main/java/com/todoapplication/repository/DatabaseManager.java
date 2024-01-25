@@ -1,4 +1,4 @@
-package repository;
+package com.todoapplication.repository;
 
 
 import java.sql.Connection;

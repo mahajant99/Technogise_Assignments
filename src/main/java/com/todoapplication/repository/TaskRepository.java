@@ -1,8 +1,8 @@
-package repository;
+package com.todoapplication.repository;
 
-import model.Task;
-import model.TaskPriority;
-import model.TaskStatus;
+import com.todoapplication.model.Task;
+import com.todoapplication.model.TaskPriority;
+import com.todoapplication.model.TaskStatus;
 
 import java.sql.*;
 import java.util.ArrayList;

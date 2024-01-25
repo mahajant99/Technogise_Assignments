@@ -1,9 +1,9 @@
-package service;
+package com.todoapplication.service;
 
 import java.util.List;
 
-import model.Task;
-import repository.TaskRepository;
+import com.todoapplication.model.Task;
+import com.todoapplication.repository.TaskRepository;
 
 public class TaskService {
 

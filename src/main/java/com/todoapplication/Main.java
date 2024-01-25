@@ -1,10 +1,12 @@
-import controller.TaskManager;
-import repository.DatabaseManager;
-import repository.TaskRepository;
-import repository.UserRepository;
-import service.TaskService;
-import service.UserService;
-import view.TaskUI;
+package com.todoapplication;
+
+import com.todoapplication.controller.TaskManager;
+import com.todoapplication.repository.DatabaseManager;
+import com.todoapplication.repository.TaskRepository;
+import com.todoapplication.repository.UserRepository;
+import com.todoapplication.service.TaskService;
+import com.todoapplication.service.UserService;
+import com.todoapplication.view.TaskUI;
 
 public class Main {
 

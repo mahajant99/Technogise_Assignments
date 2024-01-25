@@ -1,7 +1,7 @@
-package service;
+package com.todoapplication.service;
 
-import model.User;
-import repository.UserRepository;
+import com.todoapplication.model.User;
+import com.todoapplication.repository.UserRepository;
 
 public class UserService {
 

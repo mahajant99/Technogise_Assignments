@@ -1,6 +1,6 @@
-package repository;
+package com.todoapplication.repository;
 
-import model.User;
+import com.todoapplication.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

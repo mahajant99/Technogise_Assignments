@@ -1,4 +1,4 @@
-package model;
+package com.todoapplication.model;
 
 public class User {
     private int id;

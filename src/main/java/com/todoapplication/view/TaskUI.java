@@ -1,4 +1,4 @@
-package view;
+package com.todoapplication.view;
 
 import java.util.Scanner;
 
@@ -8,6 +8,7 @@ public class TaskUI {
 
     public String getUsername() {
         System.out.print("Enter username: ");
+        sc.nextLine();
         return sc.nextLine();
     }
 
