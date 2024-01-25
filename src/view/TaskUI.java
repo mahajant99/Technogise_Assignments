@@ -6,6 +6,27 @@ public class TaskUI {
     
     private Scanner sc = new Scanner(System.in);
 
+    public String getUsername() {
+        System.out.print("Enter username: ");
+        return sc.nextLine();
+    }
+
+    public String getPassword() {
+        System.out.print("Enter password: ");
+        return sc.nextLine();
+    }
+
+    public void displayLoginMenu() {
+        System.out.println("\nLogin Menu:");
+        System.out.println("1. Login");
+        System.out.println("2. Signup");
+    }
+
+    public int getLoginChoice() {
+        System.out.print("Enter your choice (1/2): ");
+        return sc.nextInt();
+    }
+
     public String getTaskName(){
         System.out.print("Enter task name: ");
         sc.nextLine();
