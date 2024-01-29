@@ -2,9 +2,9 @@ package com.todoapplication.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-
 import java.security.Key;
 import java.util.Base64;
+import javax.crypto.SecretKey;
 
 import com.liferay.portal.kernel.security.SecureRandom;
 
@@ -29,15 +29,26 @@ public class JwtUtils {
                 .compact();
     }
 
-    // public static boolean validateToken(String token) {
-    //     try {
-    //         Jwts.parserBuilder()
-    //                 .setSigningKey(Base64.getDecoder().decode(SECRET_KEY))
-    //                 .build()
-    //                 .parseClaimsJws(token);
-    //         return true;
-    //     } catch (JwtException e) {
-    //         return false;
-    //     }
-    // }
+    public static boolean verifyJwt(String jwt, String expectedIssuer, String secret) {
+        try {
+            byte[] decodedSecret = Base64.getDecoder().decode(secret);
+            SecretKey secretKey = Keys.hmacShaKeyFor(decodedSecret);
+
+            JwtParser parser = Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build();
+
+            Jws<Claims> claimsJws = parser.parseSignedClaims(jwt);
+            Claims claims = claimsJws.getPayload();
+
+            if (claims.getIssuer().equals(expectedIssuer)) {
+                return true;
+            }
+
+        } catch (JwtException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
