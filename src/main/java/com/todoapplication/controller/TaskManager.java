@@ -10,12 +10,14 @@ import com.todoapplication.repository.UserRepository;
 import com.todoapplication.service.TaskService;
 import com.todoapplication.view.TaskUI;
 import com.todoapplication.service.UserService;
+import com.todoapplication.jwt.JwtUtils;
 
 public class TaskManager {
 
     private final TaskService taskService;
     private final UserService userService;
     private boolean loggedIn;
+    private String token;
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public TaskManager(TaskService taskService, UserService userService) {
@@ -27,8 +29,8 @@ public class TaskManager {
     public boolean login(TaskUI taskUI) {
         String username = taskUI.getUsername();
         String password = taskUI.getPassword();
-        String token = userService.signIn(username, password);
-        loggedIn = (token != null);
+        this.token = userService.signIn(username, password);
+        this.loggedIn = (this.token != null);
         return loggedIn;
     }
     
@@ -41,7 +43,7 @@ public class TaskManager {
     }
 
     public void showTaskMenu(TaskUI taskUI) {
-        if (loggedIn) {
+        if (this.loggedIn) {
             taskUI.displayTaskListMenu();
         } else {
             taskUI.displayMessage("Please login to access tasks.");
@@ -49,22 +51,26 @@ public class TaskManager {
     }
 
     public String performTask(int input, TaskUI taskUI) {
-        if (loggedIn) {
-            switch (input) {
-                case 1:
-                    return addTask(taskUI);
-                case 2:
-                    return viewTasks();
-                case 3:
-                    return editTask(taskUI);
-                case 4:
-                    return deleteTask(taskUI);
-                case 5:
-                    return markTaskAsCompleted(taskUI);
-                case 6:
-                    System.exit(0);
-                default:
-                    return "Invalid input. Please try again.";
+        if (this.loggedIn) {
+            if (verifyToken(taskUI)) {
+                switch (input) {
+                    case 1:
+                        return addTask(taskUI);
+                    case 2:
+                        return viewTasks();
+                    case 3:
+                        return editTask(taskUI);
+                    case 4:
+                        return deleteTask(taskUI);
+                    case 5:
+                        return markTaskAsCompleted(taskUI);
+                    case 6:
+                        System.exit(0);
+                    default:
+                        return "Invalid input. Please try again.";
+                }
+            } else {
+                return "JWT verification failed. Please login again.";
             }
         } else {
             return "Please login to access tasks.";
@@ -72,7 +78,7 @@ public class TaskManager {
     }
 
     public String addTask(TaskUI taskUI){
-        if (loggedIn) {
+        if (this.loggedIn) {
             String name = taskUI.getTaskName();
             TaskPriority priority = getPriorityChoice(taskUI.getPriorityChoice());
 
@@ -155,6 +161,14 @@ public class TaskManager {
             return "Invalid task number.";
         }
     }
+
+    private boolean verifyToken(TaskUI taskUI) {
+        String enteredToken = taskUI.getJwtToken();
+        if (enteredToken == null || enteredToken.isEmpty()) {
+            return false;
+        }
+        return JwtUtils.verifyJwt(enteredToken, "Test JWT", JwtUtils.getSecretKey());
+    }    
 
     public void closeDatabaseConnection() {
         DatabaseManager.closeConnection();

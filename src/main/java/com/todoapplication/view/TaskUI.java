@@ -67,4 +67,10 @@ public class TaskUI {
         System.out.println(message);
     }
 
+    public String getJwtToken() {
+        System.out.print("Enter JWT token: ");
+        sc.nextLine();
+        return sc.nextLine();
+    }
+
 }

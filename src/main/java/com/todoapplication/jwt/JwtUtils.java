@@ -50,5 +50,8 @@ public class JwtUtils {
         }
         return false;
     }
-
+    
+    public static String getSecretKey() {
+        return SECRET_KEY;
+    }
 }
