@@ -19,18 +19,25 @@ public class Main {
 
         while (true) {
             taskUI.displayLoginMenu();
-            int loginChoice = taskUI.getLoginChoice();
+            int input = taskUI.getUserInput();
 
-            switch (loginChoice) {
+            switch (input) {
                 case 1:
-                    if (taskManager.login(taskUI)) {
-                        taskManager.showTaskMenu(taskUI);
-                        int input = taskUI.getUserInput();
+                    String username = taskUI.getUsername();
+                    String password = taskUI.getPassword();
 
-                        String result = taskManager.performTask(input, taskUI);
+                    String token = userService.signIn(username, password);
+                    if (token != null) {
+                        taskUI.displayMessage("Login successful. Token: " + token);
+                        
+                        taskManager.showTaskMenu(taskUI);
+                        int userInput = taskUI.getUserInput();
+
+                        String result = taskManager.performTask(userInput, taskUI);
                         taskUI.displayMessage(result);
+
                     } else {
-                        taskUI.displayMessage("Login failed. Please try again.");
+                        taskUI.displayMessage("Invalid credentials. Please try again.");
                     }
                     break;
                 case 2:

@@ -6,6 +6,7 @@ import java.util.List;
 import com.todoapplication.model.Task;
 import com.todoapplication.model.TaskPriority;
 import com.todoapplication.repository.DatabaseManager;
+import com.todoapplication.repository.UserRepository;
 import com.todoapplication.service.TaskService;
 import com.todoapplication.view.TaskUI;
 import com.todoapplication.service.UserService;
@@ -26,9 +27,11 @@ public class TaskManager {
     public boolean login(TaskUI taskUI) {
         String username = taskUI.getUsername();
         String password = taskUI.getPassword();
-        loggedIn = userService.signIn(username, password);
+        String token = userService.signIn(username, password);
+        loggedIn = (token != null);
         return loggedIn;
     }
+    
 
     public void signUp(TaskUI taskUI) {
         String username = taskUI.getUsername();

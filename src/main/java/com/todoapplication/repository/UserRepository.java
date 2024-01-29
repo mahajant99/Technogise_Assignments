@@ -1,6 +1,8 @@
 package com.todoapplication.repository;
 
+import com.todoapplication.jwt.JwtUtils;
 import com.todoapplication.model.User;
+import com.todoapplication.jwt.JwtUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,6 +44,10 @@ public class UserRepository {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String generateToken(String username) {
+        return JwtUtils.generateToken(username);
     }
 
 
